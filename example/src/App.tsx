@@ -1,18 +1,22 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-collapsible';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
+import Collapsible, { CollapsibleType } from 'react-native-collapsible';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
+  const collapsibleRef = React.useRef<CollapsibleType>(null);
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Pressable onPress={() => collapsibleRef.current?.toggle()}>
+        <Text>Header Text</Text>
+      </Pressable>
+      <Collapsible ref={collapsibleRef}>
+        <View style={styles.content}>
+          <Text>Collapsible Content 1</Text>
+          <Text>Collapsible Content 2</Text>
+          <Text>Collapsible Content 3</Text>
+        </View>
+      </Collapsible>
     </View>
   );
 }
@@ -23,9 +27,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+  content: {
+    backgroundColor: 'lightblue',
+    alignItems: 'center',
   },
 });
