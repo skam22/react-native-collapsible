@@ -11,27 +11,35 @@ npm install react-native-collapsible
 ## Usage
 
 ```js
-import Collapsible { CollapsibleType } from 'react-native-collapsible';
+import React from 'react';
+import {StyleSheet} from 'react-native;
+import Collapsible, { CollapsibleType } from 'react-native-collapsible';
 
 // ...
 
 const App = () => {
-	const collapsibleRef = React.useRef<CollapsibleType>(null);
-	return (
-		<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-			<Pressable onPress={() => collapsibleRef.current?.toggle()}>
-				<Text>Header</Text>
-			</Pressable>
-			<Collapsible>
-				<View style={{backgroundColor: 'lightblue', alignItems: 'center'}}>
-				  <Text>Collapsible Content</Text>
-					<Text>Collapsible Content</Text>
-					<Text>Collapsible Content</Text>
-				</View>
-			</Collapsible>
-		</View>
-	)
+  const collapsibleRef = React.useRef<CollapsibleType>(null);
+  return (
+    <View style={styles.screen}>
+      <Pressable onPress={() => collapsibleRef.current?.toggle()}>
+        <Text>Header</Text>
+      </Pressable>
+
+      <Collapsible ref={collapsibleRef}>
+        <View style={styles.contentContainer}>
+          <Text>Collapsible Content</Text>
+          <Text>Collapsible Content</Text>
+          <Text>Collapsible Content</Text>
+        </View>
+      </Collapsible>
+    </View>
+  )
 }
+
+const styles = StyleSheet.create({
+  screen: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  contentContainer: {backgroundColor: 'lightblue', alignItems: 'center'}
+})
 ```
 
 ## Contributing
